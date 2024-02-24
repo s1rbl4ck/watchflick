@@ -1,33 +1,64 @@
+import Head from "next/head";
 import Banner from "@/components/banner/banner.component";
+import { CARD_ORIENTATION } from "@/components/card/card.component";
 import CustomNavbar from "@/components/navbar/navbar.component";
 import SectionCard from "@/components/sectionCard/sectionCard.component";
-import { Roboto_Slab } from "next/font/google";
-import Head from "next/head";
-import { useState } from "react";
-import moviesData from "../data/movies.data.json";
+import { getVideos, getPopularVideos } from "@/lib/trailers";
+// * Data
+import homeNavbarItems from "@/data/navbar.data.json";
 
-const slab = Roboto_Slab({ subsets: ["latin"], variable: "--font-slab" });
 
-export default function Home() {
-    const [loading, setLoading] = useState(false);
 
-    const cards = moviesData;
+export async function getServerSideProps() {
+    const disneyVideos = await getVideos("Disney trailer");
+    const productivityVideos = await getVideos("Productivity");
+    const popularSeries = await getVideos("Recent Series trailer");
+    const popularVideos = await getPopularVideos();
 
+    return {
+        props: {
+            disneyVideos,
+            productivityVideos,
+            popularSeries,
+            popularVideos,
+        },
+    };
+}
+
+export default function Home({
+    disneyVideos,
+    productivityVideos,
+    popularSeries,
+    popularVideos,
+}) {
     return (
-        <main className={` ${slab.className}`}>
+        <>
             <Head>
                 <title>Netflix</title>
                 <meta name="description" content="A mini Netflix platform" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <CustomNavbar />
+            <CustomNavbar navItems={homeNavbarItems} blur={true} />
             <Banner
                 title="Clifford the red dog"
                 subTitle="a very cute dog"
-                imgUrl=""
+                imgUrl="https://images.unsplash.com/photo-1621955964441-c173e01c135b?q=80&w=886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             />
 
-            <SectionCard title="Top 10 Movies" items={cards} />
-        </main>
+            <div className="flex flex-col gap-30">
+                <SectionCard title="Popular Series" items={popularSeries} />
+                <SectionCard title="Most Trends" items={popularVideos} />
+                <SectionCard
+                    title="Disney"
+                    items={disneyVideos}
+                    orientation={CARD_ORIENTATION.PORTRAIT}
+                />
+                <SectionCard
+                    title="Productivity"
+                    items={productivityVideos}
+                    orientation={CARD_ORIENTATION.PORTRAIT}
+                />
+            </div>
+        </>
     );
 }

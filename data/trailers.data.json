@@ -1,0 +1,182 @@
+{
+    "kind": "youtube#searchListResponse",
+    "etag": "7hc7LSwE4GmhEluSVM63m4xK3H8",
+    "nextPageToken": "CAUQAA",
+    "regionCode": "CH",
+    "pageInfo": {
+        "totalResults": 1000000,
+        "resultsPerPage": 5
+    },
+    "items": [
+        {
+            "kind": "youtube#searchResult",
+            "etag": "rO2imgvyD1H1YZx4gWLZMwoYtlU",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "XtFI7SNtVpY"
+            },
+            "snippet": {
+                "publishedAt": "2024-02-11T23:50:31Z",
+                "channelId": "UC2-BeLxzUBSs0uSrmzWhJuQ",
+                "title": "Kingdom of the Planet of the Apes | Official Trailer",
+                "description": "Director Wes Ball breathes new life into the global, epic franchise set several generations in the future following Caesar's reign, ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/XtFI7SNtVpY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/XtFI7SNtVpY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/XtFI7SNtVpY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "20th Century Studios",
+                "liveBroadcastContent": "none",
+                "publishTime": "2024-02-11T23:50:31Z"
+            }
+        },
+        {
+            "kind": "youtube#searchResult",
+            "etag": "NkwSDnnao8oquSzVaIN_dxTeNSg",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "jZLB9syuj7E"
+            },
+            "snippet": {
+                "publishedAt": "2024-02-12T04:59:07Z",
+                "channelId": "UCLRlryMfL8ffxzrtqv0_k_w",
+                "title": "All SUPER BOWL 2024 Movie Trailers (Best Upcoming Movies)",
+                "description": "All Super Bowl 2024 Movie Trailers Compilation | Subscribe ➤ https://abo.yt/ki | Movie Trailer | More https://KinoCheck.com ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/jZLB9syuj7E/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/jZLB9syuj7E/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/jZLB9syuj7E/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "KinoCheck.com",
+                "liveBroadcastContent": "none",
+                "publishTime": "2024-02-12T04:59:07Z"
+            }
+        },
+        {
+            "kind": "youtube#searchResult",
+            "etag": "jYvgoDG3hmjn6bDn21bBFmnQkVc",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "iM150ZWovZM"
+            },
+            "snippet": {
+                "publishedAt": "2024-02-13T14:00:00Z",
+                "channelId": "UCWOA1ZGywLbqmigxE4Qlvuw",
+                "title": "Damsel | Official Trailer | Netflix",
+                "description": "A dutiful damsel agrees to marry a handsome prince, only to find the royal family has recruited her as a sacrifice to repay an ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/iM150ZWovZM/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/iM150ZWovZM/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/iM150ZWovZM/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "Netflix",
+                "liveBroadcastContent": "none",
+                "publishTime": "2024-02-13T14:00:00Z"
+            }
+        },
+        {
+            "kind": "youtube#searchResult",
+            "etag": "UIM6_hhFOTDrsppwZvtVJjAvO5c",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "LqfyL-2kIAI"
+            },
+            "snippet": {
+                "publishedAt": "2023-11-05T14:01:05Z",
+                "channelId": "UCLRlryMfL8ffxzrtqv0_k_w",
+                "title": "The Best Upcoming Movies 2023 &amp; 2024 (New Trailers)",
+                "description": "Top Upcoming Movies 2023 & 2024 Trailer Compilation | Subscribe ➤ https://abo.yt/ki | Movie Trailer | More ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/LqfyL-2kIAI/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/LqfyL-2kIAI/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/LqfyL-2kIAI/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "KinoCheck.com",
+                "liveBroadcastContent": "none",
+                "publishTime": "2023-11-05T14:01:05Z"
+            }
+        },
+        {
+            "kind": "youtube#searchResult",
+            "etag": "9UpoiZk11ysuEbUsPAxYSYpVjKY",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "YQ8TSHV5gcE"
+            },
+            "snippet": {
+                "publishedAt": "2024-02-16T19:15:06Z",
+                "channelId": "UCLRlryMfL8ffxzrtqv0_k_w",
+                "title": "THE BEST NEW SCIENCE-FICTION MOVIES 2024 (Trailers)",
+                "description": "Top New & Upcoming Science-Fiction Movies 2024 Trailer Compilation | Subscribe ➤ https://abo.yt/ki | Movie Trailer | More ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/YQ8TSHV5gcE/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/YQ8TSHV5gcE/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/YQ8TSHV5gcE/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "KinoCheck.com",
+                "liveBroadcastContent": "none",
+                "publishTime": "2024-02-16T19:15:06Z"
+            }
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+[
+    { "name": "Home", "route": "/" },
+    { "name": "My List", "route": "/my-list" }
+]

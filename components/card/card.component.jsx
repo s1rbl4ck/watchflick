@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardHeader, Skeleton } from "@nextui-org/react";
+import { Card, CardHeader, Skeleton, card } from "@nextui-org/react";
 import cls from "classnames";
 import Image from "next/image";
-import Link from "next/link";
 
-const CustomCard = ({ item, itemsCount, size = "sm", className }) => {
-    const { id, title, desc, slug = "", image } = item;
+export const CARD_ORIENTATION = {
+    LANDSCAPE: "landscape",
+    PORTRAIT: "portrait",
+}
+
+const CARD_OPTIONS = {
+    landscape: {
+        width: "1280",
+        height: "720",
+        cardStyle: "w-64 lg:w-80"
+    },
+    portrait: {
+        width: "720",
+        height: "1280",
+        cardStyle: "h-80 lg:h-96 w-44 lg:w-56"
+    }
+};
+
+const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSCAPE, className }) => {
+    const { title, desc, slug = "", image } = item;
     const [imageError, setImageError] = useState(false);
-
-    const cardSizes = {
-        sm: "",
-        md: "",
-        lg: "",
-    };
 
     const handleImageError = () => {
         setImageError(true);
@@ -30,13 +41,13 @@ const CustomCard = ({ item, itemsCount, size = "sm", className }) => {
         <motion.a
             className={cls(`flex-1`, className)}
             whileHover={hoverScale}
-            transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            transition={{ type: "spring", stiffness: 400, damping: 18 }}
             href={`/${slug}`}
         >
-            <Card className={`h-full ${cardSizes[size]}`}>
-                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+            <Card className={`group ${CARD_OPTIONS[orientation].cardStyle} hover:image:opacity-80`}>
+                <CardHeader className="absolute z-10 flex-col !items-start">
                     {title && (
-                        <h4 className="text-white font-medium text-xl">
+                        <h4 className="text-white font-medium text-md line-clamp-2">
                             {title}
                         </h4>
                     )}
@@ -47,14 +58,16 @@ const CustomCard = ({ item, itemsCount, size = "sm", className }) => {
                     )}
                 </CardHeader>
                 {!imageError ? (
-                    <Image
-                        className="z-0 w-full h-full object-cover"
-                        src={image}
-                        width={720}
-                        height={480}
-                        alt="Card background"
-                        onError={() => handleImageError}
-                    />
+                    <div className="bg-black h-full">
+                        <Image
+                            className={`w-full h-full object-cover aspect-video transition duration-300 ease-in-out group-hover:opacity-55`}
+                            src={image}
+                            width={CARD_OPTIONS[orientation]?.width}
+                            height={CARD_OPTIONS[orientation]?.height}
+                            alt="Card background"
+                            onError={() => handleImageError}
+                        />
+                    </div>
                 ) : (
                     <div className="h-full">
                         <Skeleton className="h-full">

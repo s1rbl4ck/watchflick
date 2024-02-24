@@ -21,6 +21,9 @@ module.exports = {
       height: {
         "5/6-full": "90vh"
       },
+      colors: {
+        "primaryColor": "#e50914"
+      }
     },
   },
   darkMode: "class",

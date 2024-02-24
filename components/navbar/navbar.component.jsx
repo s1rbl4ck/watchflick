@@ -4,7 +4,6 @@ import {
     NavbarBrand,
     NavbarContent,
     NavbarItem,
-    Link,
     Button,
     NavbarMenuToggle,
     NavbarMenu,
@@ -16,20 +15,17 @@ import {
     Avatar,
 } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 
-const CustomNavbar = () => {
+const CustomNavbar = (props) => {
+    const { isAuth = false, navItems = [], blur = false } = props;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const menuItems = [
-        { name: "Home", route: "/" },
-        { name: "My List", route: "/my-list" },
-    ];
 
     return (
         <Navbar
             className="bg-transparent absolute [&>header]:px-0 [&>header]:max-w-none"
             onMenuOpenChange={setIsMenuOpen}
-            isBlurred={true}
+            isBlurred={blur}
         >
             <div className="container mx-auto flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-between">
                 <div className="flex flex-row items-center gap-20">
@@ -54,7 +50,7 @@ const CustomNavbar = () => {
                         className="hidden sm:flex gap-4"
                         justify="between"
                     >
-                        {menuItems.map(({ name, route }, i) => (
+                        {navItems.map(({ name, route }, i) => (
                             <NavbarItem key={`${name}-${i}`}>
                                 <Link
                                     className="text-xl text-white"
@@ -68,48 +64,63 @@ const CustomNavbar = () => {
                 </div>
 
                 <NavbarContent justify="end">
-                    {/* <NavbarItem className="hidden lg:flex">
-                <Link href="/" color="foreground">Login</Link>
-            </NavbarItem> */}
-                    <Dropdown placement="bottom-end">
-                        <DropdownTrigger>
-                            <Avatar
-                                isBordered
-                                as="button"
-                                className="transition-transform"
+                    {isAuth ? (
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    isBordered
+                                    as="button"
+                                    className="transition-transform"
+                                    color="primary"
+                                    name="John Doe"
+                                    size="sm"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu
+                                aria-label="Profile Actions"
+                                variant="flat"
+                            >
+                                <DropdownItem
+                                    key="profile"
+                                    className="h-14 gap-2"
+                                >
+                                    <p className="font-semibold">
+                                        Signed in as
+                                    </p>
+                                    <p className="font-semibold">
+                                        test@example.com
+                                    </p>
+                                </DropdownItem>
+                                <DropdownItem key="settings">
+                                    My Settings
+                                </DropdownItem>
+                                <DropdownItem key="logout" color="danger">
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    ) : (
+                        <NavbarItem>
+                            <Button
+                                as={Link}
                                 color="primary"
-                                name="John Doe"
-                                size="sm"
-                            />
-                        </DropdownTrigger>
-                        <DropdownMenu
-                            aria-label="Profile Actions"
-                            variant="flat"
-                        >
-                            <DropdownItem key="profile" className="h-14 gap-2">
-                                <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">
-                                    test@example.com
-                                </p>
-                            </DropdownItem>
-                            <DropdownItem key="settings">
-                                My Settings
-                            </DropdownItem>
-                            <DropdownItem key="logout" color="danger">
-                                Log Out
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                                href="/auth"
+                                variant="flat"
+                            >
+                                Sign In
+                            </Button>
+                        </NavbarItem>
+                    )}
                 </NavbarContent>
             </div>
             <NavbarMenu className="bg-gray-600/30">
-                {menuItems.map(({ name, route }, i) => (
+                {navItems.map(({ name, route }, i) => (
                     <NavbarMenuItem key={`${name}-${i}`}>
                         <Link
                             color={
                                 i === 2
                                     ? "primary"
-                                    : i === menuItems.length - 1
+                                    : i === navItems.length - 1
                                     ? "danger"
                                     : "foreground"
                             }

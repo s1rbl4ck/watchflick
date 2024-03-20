@@ -4,10 +4,9 @@ import { CARD_ORIENTATION } from "@/components/card/card.component";
 import CustomNavbar from "@/components/navbar/navbar.component";
 import SectionCard from "@/components/sectionCard/sectionCard.component";
 import { getVideos, getPopularVideos } from "@/lib/trailers";
+import { startFetchMyQuery } from "@/lib/db/hasura";
 // * Data
 import homeNavbarItems from "@/data/navbar.data.json";
-
-
 
 export async function getServerSideProps() {
     const disneyVideos = await getVideos("Disney trailer");
@@ -31,6 +30,8 @@ export default function Home({
     popularSeries,
     popularVideos,
 }) {
+    startFetchMyQuery();
+
     return (
         <>
             <Head>
@@ -43,6 +44,7 @@ export default function Home({
                 title="Clifford the red dog"
                 subTitle="a very cute dog"
                 imgUrl="https://images.unsplash.com/photo-1621955964441-c173e01c135b?q=80&w=886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                videoId="__mSgDEOyv8"
             />
 
             <div className="flex flex-col gap-30">

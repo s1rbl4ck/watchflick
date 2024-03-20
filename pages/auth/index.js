@@ -1,12 +1,14 @@
 import CustomNavbar from "@/components/navbar/navbar.component";
+import { magic } from "@/lib/magic-client";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const Auth = () => {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const validateEmail = (value) =>
         value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
@@ -17,11 +19,32 @@ const Auth = () => {
         return validateEmail(email) ? false : true;
     }, [email]);
 
-    const formSubmitHandler = (e) => {
+    useEffect(() => {
+        if(isEmailInvalid || email === "") {
+            isDisabled !== true && setIsDisabled(true);
+        } else {
+            isDisabled !== false && setIsDisabled(false);
+        }
+    }, [isEmailInvalid, email]);
+
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
 
         if (email) {
-            router.push("/");
+            try {
+                setLoading(true);
+                const didToken = await magic.auth.loginWithMagicLink({
+                    email,
+                });
+                if (didToken) {
+                    setLoading(false);
+                    setIsDisabled(true);
+                    router.push("/");
+                }
+            } catch (error) {
+                setLoading(false);
+                console.error("Something went wrong logging in: ", error);
+            }
         }
     };
 
@@ -35,7 +58,7 @@ const Auth = () => {
         >
             <CustomNavbar />
 
-            <Card className="bg-black/65 absolute w-3/12 top-2/4 left-2/4 right-2/4 transform -translate-y-1/2 -translate-x-1/2">
+            <Card className="bg-black/65 absolute w-8/12 md:w-6/12 lg:w-4/12 xl:w-4/12 top-2/4 left-2/4 right-2/4 transform -translate-y-1/2 -translate-x-1/2">
                 <CardBody className="flex flex-col p-14 gap-8">
                     <h1 className="text-white text-4xl text-center">Sign In</h1>
                     <form
@@ -59,7 +82,7 @@ const Auth = () => {
                         <Button
                             className="bg-primaryColor text-white text-md py-6 rounded-md"
                             type="submit"
-                            isDisabled={isEmailInvalid || email === ""}
+                            isDisabled={isDisabled}
                             isLoading={loading}
                         >
                             Sign In

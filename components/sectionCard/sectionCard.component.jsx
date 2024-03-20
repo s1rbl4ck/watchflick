@@ -1,7 +1,8 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import CustomCard from "../card/card.component";
+import Link from 'next/link';
 
-const SectionCard = ({title, items, orientation}) => {
+const SectionCard = ({title, items, orientation, videoId}) => {
     const OPTIONS = { dragFree: true, containScroll: "trimSnaps",  };
     const [emblaRef] = useEmblaCarousel(OPTIONS);
 
@@ -14,7 +15,9 @@ const SectionCard = ({title, items, orientation}) => {
                 <div className="overflow-hidden" ref={emblaRef}>
                     <div className="flex touch-pan-y gap-6 py-8">
                         {items.map((item, i) => (
-                            <CustomCard key={i} id={i} item={item} itemsCount={items.length} orientation={orientation} />
+                            <Link href={`/video/${videoId}`}>
+                                <CustomCard key={i} id={i} item={item} itemsCount={items.length} orientation={orientation} />
+                            </Link>
                         ))}
                     </div>
                 </div>

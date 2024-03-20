@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -16,10 +16,51 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { magic } from "@/lib/magic-client";
 
 const CustomNavbar = (props) => {
-    const { isAuth = false, navItems = [], blur = false } = props;
+    const { navItems = [], blur = false } = props;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
+    const [username, setUsername] = useState(null);
+
+    const fetchUser = async () => {
+        try {
+            const { email, publicAddress } = await magic.user.getMetadata();
+            if(email) {
+                setUsername(email);
+                setIsAuth(true);
+            } else {
+                setUsername(null);
+                setIsAuth(false);
+            }
+        } catch (error) {
+            setUsername(null);
+            setIsAuth(false);
+            console.error("Error getting user ", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    const handleSignOut = async (e) => {
+        event.preventDefault();
+
+        try {
+            const loggedOut = await magic.user.logout();
+            if(loggedOut) {
+                setUsername(null);
+                setIsAuth(false);
+            }
+        } catch (error) {
+            setUsername(null);
+            setIsAuth(false);
+            console.error("Error logging out: ", error);
+            router.push("/auth");
+        }
+    }
 
     return (
         <Navbar
@@ -72,7 +113,7 @@ const CustomNavbar = (props) => {
                                     as="button"
                                     className="transition-transform"
                                     color="primary"
-                                    name="John Doe"
+                                    name={username}
                                     size="sm"
                                 />
                             </DropdownTrigger>
@@ -88,13 +129,13 @@ const CustomNavbar = (props) => {
                                         Signed in as
                                     </p>
                                     <p className="font-semibold">
-                                        test@example.com
+                                        {username}
                                     </p>
                                 </DropdownItem>
                                 <DropdownItem key="settings">
                                     My Settings
                                 </DropdownItem>
-                                <DropdownItem key="logout" color="danger">
+                                <DropdownItem key="logout" color="danger" as={Link} href="/auth" onClick={() => handleSignOut()}>
                                     Log Out
                                 </DropdownItem>
                             </DropdownMenu>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardHeader, Skeleton, card } from "@nextui-org/react";
+import Link from "next/link";
 import cls from "classnames";
 import Image from "next/image";
 
@@ -23,7 +24,7 @@ const CARD_OPTIONS = {
 };
 
 const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSCAPE, className }) => {
-    const { title, desc, slug = "", image } = item;
+    const { id: videoId, title, desc, slug = "", image } = item;
     const [imageError, setImageError] = useState(false);
 
     const handleImageError = () => {
@@ -38,45 +39,46 @@ const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSC
             : { scale: 1.1 };
 
     return (
-        <motion.a
+        <motion.div
             className={cls(`flex-1`, className)}
             whileHover={hoverScale}
             transition={{ type: "spring", stiffness: 400, damping: 18 }}
-            href={`/${slug}`}
         >
-            <Card className={`group ${CARD_OPTIONS[orientation].cardStyle} hover:image:opacity-80`}>
-                <CardHeader className="absolute z-10 flex-col !items-start">
-                    {title && (
-                        <h4 className="text-white font-medium text-md line-clamp-2">
-                            {title}
-                        </h4>
+            <Link href={`/video/${videoId}`}>
+                <Card className={`group ${CARD_OPTIONS[orientation].cardStyle} hover:image:opacity-80`}>
+                    <CardHeader className="absolute z-10 flex-col !items-start">
+                        {title && (
+                            <h4 className="text-white font-medium text-md line-clamp-2">
+                                {title}
+                            </h4>
+                        )}
+                        {desc && (
+                            <p className="text-tiny text-white/60 uppercase font-bold">
+                                {desc}
+                            </p>
+                        )}
+                    </CardHeader>
+                    {!imageError ? (
+                        <div className="bg-black h-full">
+                            <Image
+                                className={`w-full h-full object-cover aspect-video transition duration-300 ease-in-out group-hover:opacity-55`}
+                                src={image}
+                                width={CARD_OPTIONS[orientation]?.width}
+                                height={CARD_OPTIONS[orientation]?.height}
+                                alt="Card background"
+                                onError={() => handleImageError}
+                            />
+                        </div>
+                    ) : (
+                        <div className="h-full">
+                            <Skeleton className="h-full">
+                                <div className="bg-default-300"></div>
+                            </Skeleton>
+                        </div>
                     )}
-                    {desc && (
-                        <p className="text-tiny text-white/60 uppercase font-bold">
-                            {desc}
-                        </p>
-                    )}
-                </CardHeader>
-                {!imageError ? (
-                    <div className="bg-black h-full">
-                        <Image
-                            className={`w-full h-full object-cover aspect-video transition duration-300 ease-in-out group-hover:opacity-55`}
-                            src={image}
-                            width={CARD_OPTIONS[orientation]?.width}
-                            height={CARD_OPTIONS[orientation]?.height}
-                            alt="Card background"
-                            onError={() => handleImageError}
-                        />
-                    </div>
-                ) : (
-                    <div className="h-full">
-                        <Skeleton className="h-full">
-                            <div className="bg-default-300"></div>
-                        </Skeleton>
-                    </div>
-                )}
-            </Card>
-        </motion.a>
+                </Card>
+            </Link>
+        </motion.div>
     );
 };
 

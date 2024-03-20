@@ -1,8 +1,9 @@
 import { Button } from "@nextui-org/react";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const Banner = (props) => {
-    const { title, subTitle, imgUrl } = props;
+    const { title, subTitle, imgUrl, videoId = '' } = props;
 
     return (
         <div
@@ -17,7 +18,7 @@ const Banner = (props) => {
                 </h1>
                 <h3 className="text-white text-4xl">{title}</h3>
                 <h4 className="text-white text-2xl">{subTitle}</h4>
-                <Button className="*:text-gray-800 p-5 text-xl font-bold" size="lg">
+                <Button className="*:text-gray-800 p-5 text-xl font-bold" as={Link} href={`/video/${videoId}`} size="lg">
                     <PlayIcon className="h-6 w-6" />
                     <span>Play</span>
                 </Button>

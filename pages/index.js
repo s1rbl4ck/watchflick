@@ -4,7 +4,6 @@ import { CARD_ORIENTATION } from "@/components/card/card.component";
 import CustomNavbar from "@/components/navbar/navbar.component";
 import SectionCard from "@/components/sectionCard/sectionCard.component";
 import { getVideos, getPopularVideos } from "@/lib/trailers";
-import { startFetchMyQuery } from "@/lib/db/hasura";
 // * Data
 import homeNavbarItems from "@/data/navbar.data.json";
 
@@ -30,8 +29,6 @@ export default function Home({
     popularSeries,
     popularVideos,
 }) {
-    startFetchMyQuery();
-
     return (
         <>
             <Head>

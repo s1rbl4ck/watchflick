@@ -37,9 +37,23 @@ const Auth = () => {
                     email,
                 });
                 if (didToken) {
+                    const response = await fetch("/api/login", {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${didToken}`,
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    const loggedInResponse = await response.json();
                     setLoading(false);
                     setIsDisabled(true);
-                    router.push("/");
+
+                    if (loggedInResponse.done) {
+                        router.push("/");
+                    } else {
+                        console.log("Error in login");
+                    }
                 }
             } catch (error) {
                 setLoading(false);

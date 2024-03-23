@@ -26,7 +26,7 @@ const CustomNavbar = (props) => {
 
     const fetchUser = async () => {
         try {
-            const { email, publicAddress } = await magic.user.getMetadata();
+            const { email } = await magic.user.getMetadata();
             if(email) {
                 setUsername(email);
                 setIsAuth(true);

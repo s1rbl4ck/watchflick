@@ -137,8 +137,8 @@ const CustomNavbar = (props) => {
                                         {username}
                                     </p>
                                 </DropdownItem>
-                                <DropdownItem key="settings">
-                                    My Settings
+                                <DropdownItem key="settings" as={Link} href="/my-list">
+                                    My Favorites
                                 </DropdownItem>
                                 <DropdownItem key="logout" color="danger" as={Link} href="/auth" onClick={(e) => handleSignOut(e)}>
                                     Log Out

@@ -23,7 +23,7 @@ const CARD_OPTIONS = {
     }
 };
 
-const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSCAPE, className }) => {
+const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSCAPE, size, className }) => {
     const { id: videoId, title, desc, slug = "", image } = item;
     const [imageError, setImageError] = useState(false);
 
@@ -45,7 +45,7 @@ const CustomCard = ({id, item, itemsCount, orientation = CARD_ORIENTATION.LANDSC
             transition={{ type: "spring", stiffness: 400, damping: 18 }}
         >
             <Link href={`/video/${videoId}`}>
-                <Card className={`group ${CARD_OPTIONS[orientation].cardStyle} hover:image:opacity-80`}>
+                <Card className={`group ${CARD_OPTIONS[orientation].cardStyle} ${size} hover:image:opacity-80`}>
                     <CardHeader className="absolute z-10 flex-col !items-start">
                         {title && (
                             <h4 className="text-white font-medium text-md line-clamp-2">

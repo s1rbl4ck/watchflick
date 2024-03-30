@@ -3,15 +3,19 @@ import Banner from "@/components/banner/banner.component";
 import { CARD_ORIENTATION } from "@/components/card/card.component";
 import CustomNavbar from "@/components/navbar/navbar.component";
 import SectionCard from "@/components/sectionCard/sectionCard.component";
-import { getVideos, getPopularVideos } from "@/lib/trailers";
+import { getVideos, getPopularVideos, getWatchedVideos } from "@/lib/videos";
 // * Data
 import homeNavbarItems from "@/data/navbar.data.json";
+import useUserInfo from "@/hooks/useUserInfo";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const {userId, token} = await useUserInfo(context);
+
     const disneyVideos = await getVideos("Disney trailer");
     const productivityVideos = await getVideos("Productivity");
     const popularSeries = await getVideos("Recent Series trailer");
     const popularVideos = await getPopularVideos();
+    const watchedVideos = await getWatchedVideos({userId, token});
 
     return {
         props: {
@@ -19,6 +23,7 @@ export async function getServerSideProps() {
             productivityVideos,
             popularSeries,
             popularVideos,
+            watchedVideos
         },
     };
 }
@@ -28,6 +33,7 @@ export default function Home({
     productivityVideos,
     popularSeries,
     popularVideos,
+    watchedVideos
 }) {
     return (
         <>
@@ -47,6 +53,10 @@ export default function Home({
             <div className="flex flex-col gap-30">
                 <SectionCard title="Popular Series" items={popularSeries} />
                 <SectionCard title="Most Trends" items={popularVideos} />
+                <SectionCard
+                    title="Continue Watching"
+                    items={watchedVideos}
+                />
                 <SectionCard
                     title="Disney"
                     items={disneyVideos}

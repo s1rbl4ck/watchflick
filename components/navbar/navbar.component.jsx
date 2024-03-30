@@ -17,8 +17,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { magic } from "@/lib/magic-client";
+import { removeTokenCookie } from "@/lib/cookies";
+import { useRouter } from "next/router";
 
 const CustomNavbar = (props) => {
+    const router = useRouter();
     const { navItems = [], blur = false } = props;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
@@ -46,13 +49,15 @@ const CustomNavbar = (props) => {
     }, []);
 
     const handleSignOut = async (e) => {
-        event.preventDefault();
+        e.preventDefault();
 
         try {
             const loggedOut = await magic.user.logout();
             if(loggedOut) {
+                removeTokenCookie();
                 setUsername(null);
                 setIsAuth(false);
+                router.push("/auth");
             }
         } catch (error) {
             setUsername(null);
@@ -135,7 +140,7 @@ const CustomNavbar = (props) => {
                                 <DropdownItem key="settings">
                                     My Settings
                                 </DropdownItem>
-                                <DropdownItem key="logout" color="danger" as={Link} href="/auth" onClick={() => handleSignOut()}>
+                                <DropdownItem key="logout" color="danger" as={Link} href="/auth" onClick={(e) => handleSignOut(e)}>
                                     Log Out
                                 </DropdownItem>
                             </DropdownMenu>

@@ -51,8 +51,7 @@ const Auth = () => {
 
                     if (loggedInResponse.done) {
                         router.push("/");
-                    } else {
-                        console.log("Error in login");
+                        setIsDisabled(false);
                     }
                 }
             } catch (error) {

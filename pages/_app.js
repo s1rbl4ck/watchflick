@@ -12,36 +12,8 @@ export default function App({ Component, pageProps }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
 
-    const handleUserLoggedIn = async () => {
-        try {
-            const isLoggedIn = await magic.user.isLoggedIn();
-
-            if (isLoggedIn) {
-                router.push("/");
-            } else {
-                router.push("/auth");
-            }
-        } catch (error) {
-            router.push("/auth");
-        }
-    };
-
     useEffect(() => {
-        handleUserLoggedIn();
-    }, []);
-
-    useEffect(() => {
-        const handleComplete = () => {
-            setIsLoading(false);
-        };
-
-        router.events.on("routeChangeComplete", handleComplete);
-        router.events.on("routeChangeError", handleComplete);
-
-        return () => {
-            router.events.off("routeChangeComplete", handleComplete);
-            router.events.off("routeChangeError", handleComplete);
-        };
+        setIsLoading(false);
     }, []);
 
     const LoadingScreen = () => (

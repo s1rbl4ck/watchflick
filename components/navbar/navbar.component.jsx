@@ -140,6 +140,9 @@ const CustomNavbar = (props) => {
                                 <DropdownItem key="settings" as={Link} href="/my-list">
                                     My Favorites
                                 </DropdownItem>
+                                <DropdownItem key="repo" href="https://github.com/s1rbl4ck/watchflick">
+                                    Project Repository
+                                </DropdownItem>
                                 <DropdownItem key="logout" color="danger" as={Link} href="/auth" onClick={(e) => handleSignOut(e)}>
                                     Log Out
                                 </DropdownItem>
